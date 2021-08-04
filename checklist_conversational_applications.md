@@ -1,6 +1,5 @@
 # Conversational Applications Testing Checklist
 The list below is an attempt to define areas of potential failure in our conversational application. This list should help to verify if test cases cover risk areas appropriately and provide the expected level of quality.
-***
 ## Glossary:
 **ASR** - automatic speech recognition <br>
 **NLU** - natural language understanding <br>
@@ -10,7 +9,6 @@ The list below is an attempt to define areas of potential failure in our convers
 **TTS** - text-to-speech, a module that allows generating audio from textual prompts <br>
 **DTMF** - dual-tone multi-frequency, input using phone keypad <br>
 **Agent Request** - a situation where the user deliberately asks to connect them to the live person, sometimes considered and handled as one of the erroneous inputs <br>
-***
 ## NLU
 ### Intent recognition
 * **_Test intents according to the intent categorization._**
@@ -19,7 +17,6 @@ At least 1 test case per intent should be created. If more than 1 utterance (phr
 Can be both happy path or error handling, e.g. "I need to find the balance on my card and transfer $100 to my checking account".
 * **_Test intents using N-switch coverage (intent recognition with the previous context applied)._**
 Required to verify the context (both expected and unexpected) between different intents. For example, we can ask for card activation and after that to close the card or report about the card being stolen. In this case, the card number may or may not be passed to follow-up intents (depends on specification and requirements documents).
-***
 ## Flow
 ### Proper coverage
 * **_Test all statements using flowcharts documentation (get 100% statement coverage)._** 
@@ -32,7 +29,6 @@ Testing all independent paths from the beginning of the dialog till the end (whe
 Agent requests may have their own flow before transferring which may even apply authentication. Pay attention to the information that is passed to the agent (intent, user ANI, etc.). Usually, customers have different agent skill groups and our application allows us to differentiate which skill group caller should be forwarded. If this is the case, testing every agent skill group is required. Sometimes the logic may be quite complex and require different test design techniques to be applied.
 * **_Test disambiguations._**
 Ambiguous user inputs should be disambiguated. The main objective here is to verify disambiguation flow and potential error handling including the maximum allowed "same states"
-***
 ## Error handling
 ### Omittances and assumptions
 * **_Test error handling in every step where user input or API call to other modules/systems is possible, even if it is not described in the documentation._**
@@ -54,7 +50,6 @@ Try to loop the application on the same step by providing different valid option
 *  **_Test DTMF input (input using phone touch keypad)._**
     * Test if DTMF input is allowed. Every step may have its own rules regarding DTMF input.
     * Try mixed DTMF input e.g. "my PIN is five DTMF4 three DTMF2". Usually, this type of input is forbidden.
-***
 ## ASR
 ### Confusions and ambiguities
 * **_Test agreed vocabulary._**
@@ -70,7 +65,6 @@ It's one of the most difficult tasks for the ASR module. The list of homophones 
 * **_Test internal voice variabilities._** (mood, speed, tone)
 * **_Test sound contamination._** (background noise including ambient sounds, music, and speaking)
 * **_Test flow logic for different VB results._** (different confidence level of voice recognition)
-
 
 ## Misc
 ### Non-functional tests
@@ -91,7 +85,6 @@ Prompt interruptions allow users to speak before the system prompt is fully anno
 All data marked as sensitive (PIN code, SSN, credit card number, CVV, date of birth, etc. should be masked in all sorts of logs)
 * **_Test logging._**
 Confirm that logs contain all the information in an appropriate format as stated in the documentation
-***
 ## Performance
 * **_Measure internal delays._**
 Internal delays between different components inside the application and external delays between systems of applications (conversational app and banking app) should be within expected ranges.
